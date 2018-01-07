@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" Runat="Server">
     <div class="container center">
         <div class="image" style="background-color: #000; width: 100%;">
-            <img src="http://placehold.it/800x500" alt="" class="img-responsive center-block" >
+            <asp:Image ID="imagePage" class="img-responsive center-block" runat="server"/>
         </div>
 
         <div class="img-comments center-block" style="border: 1px solid #000; margin-top: 20px; background-color: #fff; padding: 20px;">

@@ -38,7 +38,7 @@
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
-
+      
     <!-- YRME header -->
     <div class="navbar-header yrme-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -56,11 +56,13 @@
         <!-- Explore -->
         <li><asp:HyperLink NavigateUrl="~/Default.aspx" runat="server">Explore</asp:HyperLink></li>        
       </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+      <form class="navbar-form navbar-left" role="search" id="navbar-search-form">
+        <div class="form-group">        
+           <input id="search_input" name="search_input" type="text" class="form-control" placeholder="Search" runat="server"> 
         </div>
-        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+        <button type="button" class="btn btn-default" runat="server" onserverclick="search_button">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        </button>
       </form>
       <ul class="nav navbar-nav navbar-right">
         
@@ -139,8 +141,10 @@
                                 <div class="navbar-content">
                                     <div class="row">
                                         <div class="col-md-5">
-                                           <img src="http://placehold.it/120x120" alt="Alternate Text" class="img-responsive" />
-                                           <p class="text-center small"><a href="#">Change Photo</a></p></div>
+                                            <asp:Image ID="Profile_nav_img" runat="server" class="img-responsive" ImageUrl="~/profile_photos/stef.jpg" />
+                                           
+                                           <p class="text-center small"><a href="#">Change Photo</a></p>
+                                        </div>
                                         <div class="col-md-7">
                                             <span><%: HttpContext.Current.Session["username"] %></span>
                                             <p class="text-muted small"><%: HttpContext.Current.Session["email"] %></p>
@@ -150,8 +154,9 @@
                                    <div class="navbar-footer-content">
                                        <div class="row">
                                            <form role="submit">
-                                           <div class="col-md-6">
-                                                <a href="#" class="btn btn-default btn-sm">Change Password</a></div>
+                                           <!--div class="col-md-6">
+                                               <asp:HyperLink NavigateUrl="~/Change_Password.aspx" runat="server" class="btn btn-default btn-sm">Change Password</asp:HyperLink>
+                                           </div-->
                                            <div class="col-md-6">  
                                                
                                                <input value="Log out" id="Logout" runat="server" type="button" onserverclick="log_out_button_Click" />

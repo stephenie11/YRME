@@ -9,7 +9,7 @@ public partial class UserProfile : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //SERVER/Profile/{email}
+        //SERVER/Profile/{username}
 
 
 

@@ -12,8 +12,14 @@
 
     void RegisterRoutes(RouteCollection routes)
     {
-        //SERVER/Profile/{email}
-        routes.MapPageRoute("Profile", "Profile/{email}", "~/Profile.aspx");
+        //SERVER/Profile/{username}
+        routes.MapPageRoute("Profile", "Profile/{username}", "~/Profile.aspx");
+
+        //SERVER/Photo/{id}
+        routes.MapPageRoute("Photo", "Photo/{id}", "~/Photo.aspx");
+
+        //SERVER/PhotosByTag/{tag}
+        routes.MapPageRoute("PhotosByTag", "PhotosByTag/{tag}", "~/Photos_By_Tag.aspx");
 
         routes.MapPageRoute("DefaultRoute", string.Empty, "~/Default.aspx");
 

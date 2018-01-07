@@ -5,72 +5,33 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" Runat="Server">   
     
     <div class="categories">
-        <div class="chip">
-              Landscapes <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-        </div>
+        <!-- Top 5 most used tags-->
 
-        <div class="chip">
-              Cars <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-        </div>
 
+         <div class="chip">
+            <a href="PhotosByTag/<%: Tag_1.Text %>" style="text-decoration:none; color:black;"><asp:Label ID="Tag_1" runat="server"></asp:Label></a>
+        </div>
         <div class="chip">
-              Boats <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+            <a href="PhotosByTag/<%: Tag_2.Text %>" style="text-decoration:none; color:black;"><asp:Label ID="Tag_2" runat="server"></asp:Label></a>
+        </div>
+        <div class="chip">
+            <a href="PhotosByTag/<%: Tag_3.Text %>" style="text-decoration:none; color:black;"><asp:Label ID="Tag_3" runat="server"></asp:Label></a>
         </div>
     </div>
 
+    <!--Begin Dynamic Thumbnail Gallery-->
     <h1 class="my-4 text-left text-lg-left">Thumbnail Gallery</h1>
-    <div class="grid container" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'  data-infinite-scroll='{ "path": ".pagination__next", "append": ".post", "history": false }' >
-        <div class="grid-item">
-            <asp:HyperLink NavigateUrl="Photo.aspx" runat="server" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="" />
-          </asp:HyperLink>
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="C:\Users\StefaniaPirvu\Desktop\YrmeApp\images\animals_hero_penguin_02_1.jpg" alt="" />
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="https://www.slovenia.info/uploads/narava/Mountains-and-hills-julian-alps.jpg" alt="" />
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="" />
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="http://www.telegraph.co.uk/content/dam/Travel/galleries/travel/activityandadventure/The-worlds-most-beautiful-mountains/mountains-fitzroy_3374108a.jpg" alt="" />
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="C:\Users\StefaniaPirvu\Desktop\YrmeApp\images\animals_hero_penguin_02_1.jpg" alt="" />
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="" />
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="" />
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="" />
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="" />
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="" />
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="" />
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="" />
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="" />
-        </div>
-         <div class="grid-item">
-            <img class="img-fluid img-thumbnail" src="http://placehold.it/400x300" alt="" />
-        </div>
-         <!-- test infinite scroll -->
+    <div class="grid container" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'  data-infinite-scroll='{ "path": ".pagination__next", "append": ".post", "history": false }' >    
+        <asp:Repeater ID="explorerImages" runat="server">
+            <ItemTemplate>
+                <div class="grid-item">
+                    <a href="Photo/<%# Eval("photo_id") %>">
+                        <img id="<%# Eval("photo_id") %>" class="img-fluid img-thumbnail" src="<%# Eval("location_path") %>"/>
+                    </a>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
+    </div><!--End Dynamic Thumbnail Gallery-->
 
-        
-
-    </div>
 </asp:Content>
 
