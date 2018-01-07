@@ -3,13 +3,26 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="BodyContent" Runat="Server">
-    
+
+    <% if (explorerImagesByTag.Items.Count > 0 ) { %>
     <div class="chip">
+        
+
         <a href="/PhotosByTag/<%: Page.RouteData.Values["tag"] %>" style="text-decoration:none; color:black;">
             <asp:Label ID="Tag" runat="server"><%: Page.RouteData.Values["tag"] %></asp:Label></a>
+
+       
     </div>
+     <% } %>
     <!--Begin Dynamic Thumbnail Gallery-->
+    <% if (explorerImagesByTag.Items.Count > 0)
+        { %>
     <h1 class="my-4 text-left text-lg-left">Everyone's photos </h1>
+    <% }
+    else
+    { %>
+            <h1 class="my-4 text-left text-lg-left"> No photos found! </h1> 
+    <% } %>
     <div class="grid container" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'  data-infinite-scroll='{ "path": ".pagination__next", "append": ".post", "history": false }' >    
         <asp:Repeater ID="explorerImagesByTag" runat="server">
             <ItemTemplate>

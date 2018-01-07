@@ -56,11 +56,11 @@
         <!-- Explore -->
         <li><asp:HyperLink NavigateUrl="~/Default.aspx" runat="server">Explore</asp:HyperLink></li>        
       </ul>
-      <form class="navbar-form navbar-left" role="search" id="navbar-search-form">
+      <form class="navbar-form navbar-left" role="search" id="navbar-search-form" method="POST" action="Photos_By_Tag.aspx">
         <div class="form-group">        
            <input id="search_input" name="search_input" type="text" class="form-control" placeholder="Search" runat="server"> 
         </div>
-        <button type="button" class="btn btn-default" runat="server" onserverclick="search_button">
+        <button type="submit" class="btn btn-default" runat="server">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         </button>
       </form>

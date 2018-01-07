@@ -28,11 +28,14 @@ public partial class MasterPage : System.Web.UI.MasterPage
     }
     protected void search_button(object sender, EventArgs e)
     {
+        /*
         System.Diagnostics.Debug.WriteLine(e);
-        string tagTitle = Page.Request.Form["search"];
-        int index = tagTitle.IndexOf(" ");
-        string short_tag = tagTitle.Substring(0, index);
-        Server.Transfer("PhotosByTag/" + short_tag);
+        string tagTitle = Page.Request.Form["search_input"];
+        if (tagTitle != null)
+        {
+            HttpContext.Current.Response.RedirectToRoute("PhotosByTag");
+        }
+        */
     }
 
 }
