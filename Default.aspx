@@ -25,8 +25,9 @@
         <asp:Repeater ID="explorerImages" runat="server">
             <ItemTemplate>
                 <div class="grid-item">
-                    <a href="Photo/<%# Eval("photo_id") %>">
-                        <img id="<%# Eval("photo_id") %>" class="img-fluid img-thumbnail" src="<%# Eval("location_path") %>"/>
+                 
+                    <a href="/Photo/<%# Eval("photo_id") %>">
+                        <img id="<%# Eval("photo_id") %>" class="img-fluid img-thumbnail" src="/<%# Eval("location_path") %>"/>
                     </a>
                 </div>
             </ItemTemplate>

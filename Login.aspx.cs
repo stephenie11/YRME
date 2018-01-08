@@ -33,7 +33,7 @@ public partial class _Login : System.Web.UI.Page
 
                 Boolean found_it = false;
                 Result.Text = "Did not find an user with that email address!";
-                string get_user_query = "select * from Users where email = @emailaddress";
+                string get_user_query = "select Users.user_id AS user_id, email AS email, password AS password, first_name ,last_name,path_location from Users JOIN dbo.Profile_Photos ON Profile_Photos.user_id = Users.user_id WHERE email = @emailaddress";
                 SqlCommand command = new SqlCommand(get_user_query, connection);
                 command.Parameters.AddWithValue("@emailaddress", user_login_email.Text);
 
@@ -53,16 +53,17 @@ public partial class _Login : System.Web.UI.Page
                                 int user_id = (int)sdr["user_id"];
                                 string last_name = (string)sdr["last_name"];
                                 string first_name = (string)sdr["first_name"];
+                                string path_location = (string)sdr["path_location"];
 
                                 HttpContext.Current.Session["ID"] = user_id;
 
                                 //HttpContext.Current.Session.Clear();
                                 System.Diagnostics.Debug.WriteLine(HttpContext.Current.Session["ID"]);
 
-
+                                HttpContext.Current.Session["profile_path"] = path_location;
                                 HttpContext.Current.Session["username"] = last_name + "  " + first_name;
                                 HttpContext.Current.Session["email"] = email_address;
-                                HttpContext.Current.Response.RedirectToRoute("Profile", new { username = last_name + first_name });
+                                HttpContext.Current.Response.RedirectToRoute("Profile", new { id = user_id });
 
                                 Result.Text = "";
 

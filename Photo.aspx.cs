@@ -12,7 +12,7 @@ public partial class _Photo : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         string photo_id = Page.RouteData.Values["id"] as string;
-
+        
         try
         {
             SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\StefaniaPirvu\Desktop\YrmeApp\App_Data\Database.mdf;Integrated Security=True");

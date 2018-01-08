@@ -71,13 +71,14 @@
         <li><asp:HyperLink NavigateUrl="~/Login.aspx" runat="server">Login</asp:HyperLink></li>
         <li><asp:HyperLink NavigateUrl="~/Register.aspx" runat="server">Register</asp:HyperLink></li>
         
-        <% } else { %> <!-- When user is logged -->
+        <% } else {
+                nv_user_gly.NavigateUrl = "~/Profile/" + Convert.ToString(HttpContext.Current.Session["ID"]); %> <!-- When user is logged -->
             <!-- Begin Right navbar -->
             <ul class="nav navbar-nav navbar-right">
 
                 <!--Begin Profile Navbar-->
                 <li>
-                    <asp:HyperLink NavigateUrl="~/Profile.aspx" runat="server"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></asp:HyperLink>
+                    <asp:HyperLink NavigateUrl="#" runat="server" ID="nv_user_gly"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></asp:HyperLink>
                 </li><!--End Profile Navbar-->
 
                 <!-- Notifications -->
@@ -141,15 +142,15 @@
                                 <div class="navbar-content">
                                     <div class="row">
                                         <div class="col-md-5">
-                                            <asp:Image ID="Profile_nav_img" runat="server" class="img-responsive" ImageUrl="~/profile_photos/stef.jpg" />
+                                            <asp:Image ID="Profile_nav_img" runat="server" class="img-responsive" ImageUrl="" />
                                            
-                                           <p class="text-center small"><a href="#">Change Photo</a></p>
+                                                                             
                                         </div>
                                         <div class="col-md-7">
                                             <span><%: HttpContext.Current.Session["username"] %></span>
                                             <p class="text-muted small"><%: HttpContext.Current.Session["email"] %></p>
                                             <div class="divider"></div>
-                                            <a href="#" class="btn btn-primary btn-sm active">Edit Profile</a> </div></div></div>
+                                            <a href="/Edit_profile.aspx" class="btn btn-primary btn-sm active">Edit Profile</a> </div></div></div>
                                 <div class="navbar-footer">
                                    <div class="navbar-footer-content">
                                        <div class="row">
@@ -180,10 +181,10 @@
 
 
 <!--Begin Body Content Holder-->
-        <form runat="server">
+        
         <asp:ContentPlaceHolder id="BodyContent" runat="server">
         </asp:ContentPlaceHolder><hr /> <!-- End Body Content Holder-->
-        </form>
+       
 <!-- Begin Footer -->
 <footer class="py-5 bg-dark">
         <div class="container">

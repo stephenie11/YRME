@@ -11,10 +11,10 @@
 			    	<h3 class="panel-title">Please register</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8" role="form">
+			    	<form accept-charset="UTF-8" role="form" runat="server">
                     <fieldset>
                         <!--First name-->
-			    	  	<div class="form-group">
+			    	  	<div class="form-group" >
                             <asp:TextBox ID="user_reg_firstname" runat="server" class="form-control" placeholder="First Name"/>
                             <asp:RequiredFieldValidator ID="reg_firstname_validation" runat="server" ControlToValidate="user_reg_firstname" ErrorMessage="Please let us know your first name!" ForeColor="Red"></asp:RequiredFieldValidator>
 			    		</div>
