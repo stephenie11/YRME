@@ -32,7 +32,7 @@
                   <div class="form-group">
                     <asp:Label class="col-lg-3 control-label" >First name:</asp:Label>
                     <div class="col-lg-8">
-                        <asp:TextBox ID="edit_first_name" runat="server" class="form-control" placeholder=""/>
+                        <asp:TextBox ID="edit_first_name" runat="server" class="form-control" placeholder="Jon"/>
                         <asp:RequiredFieldValidator ID="fs_edit_validation" runat="server" ControlToValidate="edit_first_name" ErrorMessage="Please fill with your first name!" ForeColor="Red"></asp:RequiredFieldValidator>
 			    		
                     </div>

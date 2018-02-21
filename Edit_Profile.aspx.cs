@@ -117,12 +117,17 @@ public partial class Edit_Profile : System.Web.UI.Page
                         command_get_current_path.Parameters.AddWithValue("@userid", Convert.ToInt32(HttpContext.Current.Session["ID"]));
                         string v_current_path = Convert.ToString(command_get_current_path.ExecuteScalar());
                         con1.Close();
-
-                        var filePath = Server.MapPath(v_current_path);
-                        if (File.Exists(filePath))
+                   
+                        // delete prev pic if it is not the default photo
+                        if(!(v_current_path.Equals("~/profile_photos/facebook-default-no-profile-pic-300x300.jpg")))
                         {
-                            File.Delete(filePath);
+                            var filePath = Server.MapPath(v_current_path);
+                            if (File.Exists(filePath))
+                            {
+                                File.Delete(filePath);
+                            }
                         }
+                        
 
                         con1.Open();
                         string update_avatar_path = "update Profile_Photos set  path_location = @pathlocation where user_id = @userid";
@@ -170,7 +175,7 @@ public partial class Edit_Profile : System.Web.UI.Page
             {
                 Edit_Errors.Text = ex.Message;
             }
-            HttpContext.Current.Response.RedirectToRoute("EditProfile", new { id = HttpContext.Current.Session["id"] });
+            HttpContext.Current.Response.RedirectToRoute("Profile", new { id = HttpContext.Current.Session["id"] });
         }
 
     }

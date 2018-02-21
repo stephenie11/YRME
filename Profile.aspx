@@ -19,7 +19,7 @@
         <!-- toggle button-->
         <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
             <div class="btn-group" role="group">
-                <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                <button type="button" id="stars" class="btn btn-default" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                     <div class="hidden-xs">About</div>
                 </button>
             </div>
@@ -71,24 +71,42 @@
                 </div><!--End About tab-->
 
                 <!-- Albums -->
-                <div class="tab-pane fade in" id="tab2">
-                     <div class="grid container"  data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'  data-infinite-scroll='{ "path": ".pagination__next", "append": ".post", "history": false }'>    
-                        <asp:Repeater ID="explorerAlbums" runat="server">
-                            <ItemTemplate>
-                                <div class="grid-item">
-                                    <a href="/Album/<%# Eval("album_id") %>">
-                                        <img  id="<%# Eval("photo_id") %>" class="img-fluid img-thumbnail" src="/<%# Eval("location_path") %>" />
-                                    </a>
-                                </div>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </div>
+                <div class="tab-pane fade in active" id="tab2" style="height=auto">
+                    <h3>Albums</h3>
+                    <form runat="server">
+                        <asp:Label ID="AddAlbumErrors" ForeColor="Red" runat="server"  Text=""></asp:Label>
+                        <!--Album Gallery-->
+                         <div class="grid container"  data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'  data-infinite-scroll='{ "path": ".pagination__next", "append": ".post", "history": false }'>    
+                            <!--Create new album -->
+                             <% if (HttpContext.Current.Session["ID"] != null && (int)HttpContext.Current.Session["ID"] == g_user_id)
+                                 { %>
+                                 <div class="grid-item">
+                                 
+                                         <asp:ImageButton ID="AddAlbum" runat="server" class="img-fluid img-thumbnail" Width="180px" ImageUrl="~/images/newalb.PNG" OnClick="Create_new_album" />
+                                         <asp:TextBox  ID="AddAlbumTitle" runat="server" class="form-control" Text="Untitled Album" Width="180px"></asp:TextBox>
+                                         <asp:RequiredFieldValidator ID="add_album_title_validation" runat="server" ControlToValidate="AddAlbumTitle" ErrorMessage="Please fill with a album title!" ForeColor="Red"></asp:RequiredFieldValidator>                                
+                                 
+                                 </div>
+                             <% } %>
+                             <!--Albums Repeater-->
+                             <asp:Repeater ID="explorerAlbums" runat="server">
+                                <ItemTemplate>
+                                    <div class="grid-item">
+                                        <a href="/Album/<%# Eval("album_id") %>">
+                                            <img  id="<%# Eval("photo_id") %>" class="img-fluid img-thumbnail" src="/<%# Eval("location_path") %>" />                                 
+                                        </a>
+                                        <p><%# Eval("album_title") %></p>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
+                    </form>
                 </div>
 
                 <!--begin FAVOURITES-->
-                <div class="tab-pane fade in" id="tab3">
+                <div class="tab-pane fade in active" id="tab3">
                     <!--Begin Dynamic Thumbnail Gallery-->
-
+                    <h3>Faves</h3>
                     <div class="grid container"  data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'  data-infinite-scroll='{ "path": ".pagination__next", "append": ".post", "history": false }'>    
                         <asp:Repeater ID="explorerFavs" runat="server">
                             <ItemTemplate>

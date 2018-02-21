@@ -53,16 +53,58 @@ public partial class UserProfile : System.Web.UI.Page
     {
         return g_nr_faved;
     }
-    
+
+    protected void Create_new_album(object sender, EventArgs e)
+    {
+        if (Page.IsPostBack)
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\StefaniaPirvu\Desktop\YrmeApp\App_Data\Database.mdf;Integrated Security=True");
+            int v_user_id = Convert.ToInt32(HttpContext.Current.Session["ID"]);
+            string v_album_title = AddAlbumTitle.Text;
+            using (con)
+            {
+                // check if user already has an album with that title
+                con.Open();
+                string check_album_title_q = "select * from Albums where user_id = @userid and lower(album_title) = @albumtitle";
+                SqlCommand check_album_title_c = new SqlCommand(check_album_title_q, con);
+                check_album_title_c.Parameters.AddWithValue("@userid", v_user_id);
+                check_album_title_c.Parameters.AddWithValue("@albumtitle", v_album_title.ToLower());
+                int result = Convert.ToInt32(check_album_title_c.ExecuteScalar());
+                if (result > 0)
+                {
+                    AddAlbumErrors.Text = "You already have an album with that title";
+                    con.Close();
+                    return;
+                }
+                con.Close();
+                //insert new album
+                con.Open();
+                string insert_album_query = "insert into Albums (user_id,album_title) values (@userid, @albumtitle)";
+                SqlCommand insert_album_comm = new SqlCommand(insert_album_query, con);
+                insert_album_comm.Parameters.AddWithValue("@userid", v_user_id);
+                insert_album_comm.Parameters.AddWithValue("@albumtitle", v_album_title);
+                insert_album_comm.ExecuteNonQuery();
+                AddAlbumErrors.Text = "";
+                con.Close();
+            }
+            HttpContext.Current.Response.RedirectToRoute("Profile", new { id = v_user_id });
+
+        }
+    }
+
     protected void Page_Load(object sender,EventArgs e)
     {
+        AddAlbumErrors.Text = "";
         //SERVER/Profile/{id}
 
         // user_id of the loaded page
-        g_user_id = Convert.ToInt32(Page.RouteData.Values["id"]);
+        string id = Page.RouteData.Values["id"] as string;
+        g_user_id = Convert.ToInt32(id);
 
         // concection string
         SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\StefaniaPirvu\Desktop\YrmeApp\App_Data\Database.mdf;Integrated Security=True");
+
+
 
         using(con)
         {
@@ -123,7 +165,7 @@ public partial class UserProfile : System.Web.UI.Page
 
             // for albums gallery
             con.Open();
-            string user_albums_query = "SELECT albs.location_path AS location_path, albs.album_id AS album_id,albs.photo_id AS photo_id FROM (SELECT ROW_NUMBER() OVER(PARTITION BY album_id ORDER BY Album_Photos.photo_id) AS rownum, dbo.Photos.photo_id, location_path, album_id FROM dbo.Album_Photos JOIN dbo.Photos ON Photos.photo_id = Album_Photos.photo_id WHERE USER_ID = @userid) albs WHERE albs.rownum = 1";
+            string user_albums_query = "SELECT albs.album_title AS album_title, albs.location_path AS location_path, albs.album_id AS album_id,albs.photo_id AS photo_id FROM (SELECT ROW_NUMBER() OVER(PARTITION BY Album_Photos.album_id ORDER BY Album_Photos.photo_id) AS rownum, ISNULL(dbo.Photos.photo_id, 0)  AS photo_id, ISNULL(dbo.Photos.location_path, 'images/empty-album.png') AS location_path, dbo.Albums.album_id AS album_id, dbo.Albums.album_title AS album_title FROM dbo.Albums LEFT JOIN dbo.Album_Photos ON Album_Photos.album_id = Albums.album_id LEFT JOIN dbo.Photos ON Photos.photo_id = Album_Photos.photo_id WHERE Albums.USER_ID = @userid) albs WHERE albs.rownum = 1";
             SqlDataAdapter dataAdapter_albums = new SqlDataAdapter(user_albums_query, con);
             dataAdapter_albums.SelectCommand.Parameters.AddWithValue("@userid", g_user_id);
             DataSet dataSet_albums = new DataSet();
@@ -135,5 +177,7 @@ public partial class UserProfile : System.Web.UI.Page
         }
 
     }
+
+
 
 }

@@ -15,6 +15,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- CSS references -->
+    <link href="css/comment/Photo.css" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/main/main.css" rel="stylesheet" />
     <link href="css/profile/profile.css" rel="stylesheet" />
@@ -81,59 +82,6 @@
                     <asp:HyperLink NavigateUrl="#" runat="server" ID="nv_user_gly"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></asp:HyperLink>
                 </li><!--End Profile Navbar-->
 
-                <!-- Notifications -->
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> (<b>2</b>)</a>
-                  <ul class="dropdown-menu notify-drop">
-                    <div class="notify-drop-title">
-            	        <div class="row">
-            		        <div class="col-md-6 col-sm-6 col-xs-6">Notifications (<b>2</b>)</div>
-            		        <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title="tümü okundu."><i class="fa fa-dot-circle-o"></i></a></div>
-            	        </div>
-                    </div>
-                    <!-- end notify title -->
-                    <!-- notify content -->
-                    <div class="drop-content">
-            	        <li>
-            		        <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
-            		        <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
-            		
-            		        <hr>
-            		        <p class="time">Şimdi</p>
-            		        </div>
-            	        </li>
-            	        <li>
-            		        <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
-            		        <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
-            		        <p>Lorem ipsum sit dolor amet consilium.</p>
-            		        <p class="time">1 Saat önce</p>
-            		        </div>
-            	        </li>
-            	        <li>
-            		        <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
-            		        <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
-            		        <p>Lorem ipsum sit dolor amet consilium.</p>
-            		        <p class="time">29 Dakika önce</p>
-            		        </div>
-            	        </li>
-            	        <li>
-            		        <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
-            		        <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
-            		        <p>Lorem ipsum sit dolor amet consilium.</p>
-            		        <p class="time">Dün 13:18</p>
-            		        </div>
-            	        </li>
-            	        <li>
-            		        <div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div></div>
-            		        <div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Ahmet</a> yorumladı. <a href="">Çicek bahçeleri...</a> <a href="" class="rIcon"><i class="fa fa-dot-circle-o"></i></a>
-            		        <p>Lorem ipsum sit dolor amet consilium.</p>
-            		        <p class="time">2 Hafta önce</p>
-            		        </div>
-            	        </li>
-                    </div>
-                  </ul>
-                </li> <!-- End of notification -->
-
                 <!-- Begin account navbar-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
@@ -154,7 +102,7 @@
                                 <div class="navbar-footer">
                                    <div class="navbar-footer-content">
                                        <div class="row">
-                                           <form role="submit">
+                                           <form>
                                            <!--div class="col-md-6">
                                                <asp:HyperLink NavigateUrl="~/Change_Password.aspx" runat="server" class="btn btn-default btn-sm">Change Password</asp:HyperLink>
                                            </div-->
@@ -162,7 +110,8 @@
                                                
                                                <input value="Log out" id="Logout" runat="server" type="button" onserverclick="log_out_button_Click" />
                                                
-                                           </div></form>
+                                           </div>
+                                           </form>
                                        </div>
                                    </div>
                                </div>
